@@ -96,8 +96,8 @@ void keyPressed(){
 }
 
 void grid(){
-			stroke(40);
-		strokeWeight(0.5);
+			stroke(100);
+		strokeWeight(0.25);
 
 	// float offsetX = width - int(width/pubSize)*pubSize;
 	// println(offsetX , width%pubSize);
@@ -120,7 +120,7 @@ void grid(){
 int countGO=0;
 void gameIsOver(){
 	if(snake.collide && countGO<100){
-		fill(random(255),100);
+		fill(random(255),random(255),random(255),100);
 		rectMode(CENTER);
 		rect(width/2,height/2,width,height);
 		countGO++;

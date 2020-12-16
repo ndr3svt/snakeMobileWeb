@@ -42,7 +42,7 @@ class Snake{
 		size=_size;
 	}
 	void move(Food _food){
-		if(speedCount< 4){
+		if(speedCount< 8){
 			speedCount++;
 		}else{
 			speedCount=0;

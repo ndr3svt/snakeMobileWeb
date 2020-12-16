@@ -16,6 +16,13 @@ import java.io.IOException;
 
 public class snake extends PApplet {
 
+// by ndr3svt zurich 15 december 2020
+// first attempt to create the snake game for mobile web
+// for visitors to my page
+// use your phone for what your phone was made for: playing snake
+
+
+
 
 SoundFile s;
 SoundFile gOver;
@@ -47,7 +54,10 @@ public void draw(){
 	snake.update(food);
 	snake.display();
 	pubSize=PApplet.parseInt(map(mouseX,0,width,10,200));
+	/* this could use a scroll mouse zoom function */
+	/* maybe this function could be also automated to make it a bit harder */
 	snake.scale(pubSize);
+	/* this could use a scroll mouse zoom function or a finger zoom on the mobile... */
 	food.display();
 	gameIsOver();
 }
@@ -104,8 +114,8 @@ public void keyPressed(){
 }
 
 public void grid(){
-			stroke(40);
-		strokeWeight(0.5f);
+			stroke(100);
+		strokeWeight(0.25f);
 
 	// float offsetX = width - int(width/pubSize)*pubSize;
 	// println(offsetX , width%pubSize);
@@ -113,7 +123,6 @@ public void grid(){
 	// println(offsetX);
 	float x2 = width/2 - pubSize/2;
 	for(float x = width/2+pubSize/2; x < width; x = x+pubSize){
-		
 		line(x,0,x,height);
 		line(x2,0,x2,height);
 		x2 = x2-pubSize;
@@ -129,7 +138,7 @@ public void grid(){
 int countGO=0;
 public void gameIsOver(){
 	if(snake.collide && countGO<100){
-		fill(random(255),100);
+		fill(random(255),random(255),random(255),100);
 		rectMode(CENTER);
 		rect(width/2,height/2,width,height);
 		countGO++;
@@ -148,7 +157,7 @@ public void gameIsOver(){
 
 
 
-
+// this class is in charge of the food piece
 class Food{
 	PVector pos;
 	int id=0;
@@ -169,6 +178,8 @@ class Food{
 		pos = new PVector ( PApplet.parseInt(random(width)), PApplet.parseInt(random(height)));
 	}
 }
+
+// this class is in charge of the whole snake 
 class Snake{
 	ArrayList<PVector> tail= new ArrayList<PVector>();
 	PVector pos;
@@ -187,7 +198,7 @@ class Snake{
 		size=_size;
 	}
 	public void move(Food _food){
-		if(speedCount< 4){
+		if(speedCount< 8){
 			speedCount++;
 		}else{
 			speedCount=0;
@@ -205,6 +216,7 @@ class Snake{
 				pos.x = pos.x + (1*size);
 				break;
 			}
+			/* this could use a modulo function */
 			float offX = abs(width-((PApplet.parseInt(width/size)+1)*size));
 			float offY = abs(height-((PApplet.parseInt(height/size)+1)*size));
 			// println(offX);
@@ -296,6 +308,7 @@ class Snake{
 		}
 		
 	}
+	/* This could use some vector physics like an attractor or so for the head of the snake */
 	public void tapControl(){
 		float threshold =60;
 		PVector tap = new PVector(mouseX,mouseY);
@@ -315,6 +328,7 @@ class Snake{
 			}
 		}
 	}
+	/* This could use some vector physics like an attractor or so for the head of the snake */
 	public void display(){
 		displayTail();
 		fill(40);
